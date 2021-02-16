@@ -25,7 +25,11 @@ int main(int argc, char** argv) {
   }
 
   // TODO: complete the send command
-
+  if (world_rank != 0) {
+  	MPI_Send(&token, 1, MPI_INT, (world_rank - 1)% world_size, 0, MPI_COMM_WORLD);
+  }
+  else{
+       MPI_Send(&token, 1, MPI_INT, world_size - 1, 0, MPI_COMM_WORLD);}
   // TODO: complete the corner case
   if (world_rank = world_size - 1) {
     // TODO: complete the receive command
@@ -33,7 +37,7 @@ int main(int argc, char** argv) {
              MPI_STATUS_IGNORE);
     // TODO: complete the print command
     printf("Process %d received token %d from process %d\n", world_rank, token,
-           0);
+           world_rank - 1);
   }
   MPI_Finalize();
 }

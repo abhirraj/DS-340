@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
       /* data         = */ &number, 
       /* count        = */ 1, 
       /* datatype     = */ MPI_INT, 
-      /* destination  = */ word_rank + 1, 
+      /* destination  = */ world_rank + 1, 
       /* tag          = */ 0, 
       /* communicator = */ MPI_COMM_WORLD);
   } else { // TODO: receive at odd process
@@ -33,11 +33,11 @@ int main(int argc, char** argv) {
       /* data         = */ &number, 
       /* count        = */ 1, 
       /* datatype     = */ MPI_INT, 
-      /* source       = */ word_rank - 1, 
+      /* source       = */ world_rank - 1, 
       /* tag          = */ 0, 
       /* communicator = */ MPI_COMM_WORLD, 
       /* status       = */ MPI_STATUS_IGNORE);
-    printf("Process %d received number %d from process %d\n", );
+    printf("Process %d received number %d from process %d\n",world_rank,number,world_rank - 1 );
   }
 
   MPI_Finalize();
